@@ -53,6 +53,7 @@ jobs:
           python ci_review.py --plan real_plan.json > review.md
 
       - name: Comment AI Review on PR
+        working-directory: .
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
