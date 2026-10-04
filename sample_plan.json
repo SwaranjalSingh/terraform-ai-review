@@ -1,0 +1,65 @@
+{
+  "format_version": "1.2",
+  "resource_changes": [
+    {
+      "address": "azurerm_resource_group.example",
+      "mode": "managed",
+      "type": "azurerm_resource_group",
+      "name": "example",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {
+          "name": "demo-resource-group",
+          "location": "East US"
+        }
+      }
+    },
+    {
+      "address": "azurerm_storage_account.example",
+      "mode": "managed",
+      "type": "azurerm_storage_account",
+      "name": "example",
+      "change": {
+        "actions": ["update"],
+        "before": {
+          "account_tier": "Standard"
+        },
+        "after": {
+          "account_tier": "Premium"
+        }
+      }
+    },
+    {
+      "address": "azurerm_virtual_network.example",
+      "mode": "managed",
+      "type": "azurerm_virtual_network",
+      "name": "example",
+      "change": {
+        "actions": ["delete"],
+        "before": {
+          "name": "old-vnet",
+          "address_space": ["10.0.0.0/16"]
+        },
+        "after": null
+      }
+    },
+    {
+      "address": "azurerm_subnet.example",
+      "mode": "managed",
+      "type": "azurerm_subnet",
+      "name": "example",
+      "change": {
+        "actions": ["delete", "create"],
+        "before": {
+          "name": "app-subnet",
+          "address_prefixes": ["10.0.1.0/24"]
+        },
+        "after": {
+          "name": "app-subnet",
+          "address_prefixes": ["10.0.2.0/24"]
+        }
+      }
+    }
+  ]
+}

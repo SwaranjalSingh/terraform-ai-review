@@ -1,0 +1,19 @@
+{
+  "format_version": "1.2",
+  "resource_changes": [
+    {
+      "address": "azurerm_resource_group.test",
+      "mode": "managed",
+      "type": "azurerm_resource_group",
+      "name": "test",
+      "change": {
+        "actions": ["create"],
+        "before": null,
+        "after": {
+          "name": "demo-rg",
+          "location": "East US"
+        }
+      }
+    }
+  ]
+}

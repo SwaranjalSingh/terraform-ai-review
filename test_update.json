@@ -1,0 +1,20 @@
+{
+  "format_version": "1.2",
+  "resource_changes": [
+    {
+      "address": "azurerm_storage_account.test",
+      "mode": "managed",
+      "type": "azurerm_storage_account",
+      "name": "test",
+      "change": {
+        "actions": ["update"],
+        "before": {
+          "account_tier": "Standard"
+        },
+        "after": {
+          "account_tier": "Premium"
+        }
+      }
+    }
+  ]
+}

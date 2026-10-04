@@ -1,0 +1,60 @@
+name: Terraform AI Review
+
+on:
+  pull_request:
+    paths:
+      - "demo-terraform/**"
+      - "*.py"
+      - "requirements.txt"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  terraform-ai-review:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: demo-terraform
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Install Python dependencies
+        working-directory: .
+        run: |
+          pip install -r requirements.txt
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Generate Terraform Plan
+        run: terraform plan -out=tfplan
+
+      - name: Convert Terraform Plan to JSON
+        run: terraform show -json tfplan > ../real_plan.json
+
+      - name: Run AI Terraform Review
+        working-directory: .
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python ci_review.py --plan real_plan.json > review.md
+
+      - name: Comment AI Review on PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh pr comment ${{ github.event.pull_request.number }} \
+            --body-file review.md

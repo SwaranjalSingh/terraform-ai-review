@@ -1,0 +1,9 @@
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+.env
+*.tfplan
+__pycache__/
+demo-terraform/tfplan
