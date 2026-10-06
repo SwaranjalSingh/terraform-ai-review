@@ -11,6 +11,6 @@ provider "local" {}
 
 resource "local_file" "demo" {
   filename = "${path.module}/demo.txt"
-  content  = "Terraform AI Review Demo"
+  content = "Terraform AI Review Demo - PR Test"
   
 }
